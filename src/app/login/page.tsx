@@ -1,6 +1,22 @@
+"use client";
+
+import { supabase } from "@/utils/supabaseClient";
 import Image from "next/image";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
+
+const signInWithGoogle = async () => {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: `${location.origin}/auth/callback`,
+    },
+  });
+
+  if (error) {
+    console.error("google login error : ", error);
+  }
+};
 
 export default function Login() {
   return (
@@ -18,7 +34,10 @@ export default function Login() {
             Log in to Periskope
           </h1>
         </header>
-        <button className="w-full flex items-center justify-center border py-2 rounded-md border-neutral-300 hover:bg-neutral-50 cursor-pointer ease text-neutral-700 font-medium md:text-base text-sm">
+        <button
+          className="w-full flex items-center justify-center border py-2 rounded-md border-neutral-300 hover:bg-neutral-50 cursor-pointer ease text-neutral-700 font-medium md:text-base text-sm"
+          onClick={signInWithGoogle}
+        >
           <FcGoogle className="md:w-6 w-5 md:h-6 h-5 mr-2" />
           Continue with Google
         </button>
@@ -33,7 +52,7 @@ export default function Login() {
             Continue with Email
           </button>
         </form>
-        <p className="md:text-sm text-xs text-neutral-500 mt-10">
+        <p className="md:text-sm text-xs text-neutral-500 mt-10 text-center">
           By signing up, you agree to Periskope's <br />
           <Link href={""} className="underline">
             Terms of service

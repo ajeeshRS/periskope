@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Inter } from "next/font/google";
 import "./globals.css";
+import Sidebar from "@/components/sidebar";
+import Navbar from "@/components/navbar";
+import RightSidebar from "@/components/right-sidebar";
 
 const inter = Inter({
   weight: ["400", "500", "600", "700"],
@@ -30,7 +33,14 @@ export default function RootLayout({
         className={`${inter.variable} ${geist.variable} antialiased`}
         suppressHydrationWarning
       >
-        {children}
+        <div className="flex h-screen">
+          <Sidebar />
+          <div className="flex-1 flex flex-col">
+            <Navbar />
+            <main className="flex-1">{children}</main>
+          </div>
+          <RightSidebar />
+        </div>
       </body>
     </html>
   );

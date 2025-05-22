@@ -13,6 +13,7 @@ import {
 import { BsStars } from "react-icons/bs";
 import AvatarGroup from "@/components/avatar-group";
 import MessageInput from "@/components/message-input";
+import { TbMessageCirclePlus } from "react-icons/tb";
 
 export default function Home() {
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function Home() {
 
   return (
     <main className="w-full h-full flex items-center relative">
-      <section className="w-2/6 h-full overflow-y-hidden">
+      <section className="w-2/6 h-full overflow-y-hidden relative">
         <div className="w-full flex items-center justify-between px-3 bg-neutral-50 h-14">
           <div className="flex items-center  space-x-2">
             <button className="flex items-center text-green-600 font-semibold">
@@ -53,6 +54,7 @@ export default function Home() {
             </div>
           </div>
         </div>
+        {/* All chats */}
         <div className="w-full h-[calc(100vh-112px)] flex flex-col items-start justify-start overflow-y-scroll scroll-smooth">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 2, 2, 2, 2, 2, 2, 2].map(
             (chat, index) => (
@@ -60,6 +62,9 @@ export default function Home() {
             )
           )}
         </div>
+        <button className="flex items-center justify-center bg-green-600 hover:bg-green-700 ease text-white rounded-full w-12 h-12 absolute  bottom-4 right-6">
+          <TbMessageCirclePlus className="w-6 h-6" />
+        </button>
       </section>
       <section className="w-[calc(4/6*100%-60px)] h-full flex flex-col">
         {/* chat top bar */}

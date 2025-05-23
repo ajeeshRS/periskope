@@ -1,9 +1,29 @@
+"use client";
 import Image from "next/image";
 import { TbLayoutSidebarLeftCollapseFilled } from "react-icons/tb";
 import { TbStarsFilled } from "react-icons/tb";
 import { leftSidebarItems } from "@/constants/sidebar.constants";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { supabase } from "@/utils/supabaseClient";
+import { useRouter } from "next/navigation";
 
 export default function Sidebar() {
+  const router = useRouter();
+  const signOut = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      alert("error logging out!");
+      return;
+    }
+
+    router.push("/login");
+  };
   return (
     <aside className="w-[60px] h-screen border-r border-neutral-300 flex flex-col justify-between items-center py-4 px-3 bg-white">
       <nav>
@@ -50,7 +70,23 @@ export default function Sidebar() {
           <TbStarsFilled className="w-5 h-5 text-neutral-500" />
         </div>
         <div className="p-2 hover:bg-neutral-100 rounded-lg ease">
-          <TbLayoutSidebarLeftCollapseFilled className="w-5 h-5 text-neutral-500" />
+          <Dialog>
+            <DialogTrigger>
+              <TbLayoutSidebarLeftCollapseFilled className="w-5 h-5 text-neutral-500" />
+            </DialogTrigger>
+            <DialogContent className="p-10 flex flex-col items-center justify-center">
+              <DialogHeader>
+                <DialogTitle>Are you sure about logging out?</DialogTitle>
+              </DialogHeader>
+
+              <button
+                onClick={signOut}
+                className="px-2 py-1 w-fit h-fit rounded-lg text-white bg-green-500 my-2 hover:bg-green-600"
+              >
+                Logout
+              </button>
+            </DialogContent>
+          </Dialog>
         </div>
       </footer>
     </aside>

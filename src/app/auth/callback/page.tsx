@@ -1,6 +1,6 @@
 "use client";
 
-import { handleAuthCallback } from "@/libs/actions";
+import { handleAuthCallback } from "@/lib/actions";
 import { supabase } from "@/utils/supabaseClient";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -30,7 +30,7 @@ export default function AuthCallback() {
         accessToken: session.access_token ?? "",
       });
 
-      router.push("/");
+      router.push("/chat");
     };
 
     handleLogin();

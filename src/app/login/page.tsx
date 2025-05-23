@@ -53,7 +53,7 @@ export default function Login() {
           </button>
         </form>
         <p className="md:text-sm text-xs text-neutral-500 mt-10 text-center">
-          By signing up, you agree to Periskope's <br />
+          By signing up, you agree to Periskope&apos;s <br />
           <Link href={""} className="underline">
             Terms of service
           </Link>{" "}

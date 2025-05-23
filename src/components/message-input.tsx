@@ -11,17 +11,32 @@ import { IoSend } from "react-icons/io5";
 import { GrAttachment } from "react-icons/gr";
 import { BsFillFileTextFill } from "react-icons/bs";
 
-export default function MessageInput() {
+interface MessageProps {
+  message: string;
+  setMessage: (value: string) => void;
+  sendMessage: () => void;
+}
+
+export default function MessageInput({
+  message,
+  setMessage,
+  sendMessage,
+}: MessageProps) {
   return (
-    <div className="w-full bg-white border-t h-32 border-gray-100">
+    <div className="w-full bg-white border-t h-26 border-gray-100 border-r border-t-neutral-300">
       {/* message input */}
       <div className="w-full flex items-center justify-between px-5 py-4">
         <input
           type="text"
           placeholder="Message..."
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           className="w-full text-gray-700 placeholder-gray-400 bg-transparent border-none outline-none text-base font-normal"
         />
-        <button className="text-green-600 hover:text-green-700 transition-colors">
+        <button
+          onClick={sendMessage}
+          className="text-green-600 hover:text-green-700 transition-colors"
+        >
           <IoSend className="w-6 h-6" />
         </button>
       </div>

@@ -9,7 +9,7 @@ export const handleAuthCallback = async (user: {
   username: string;
   accessToken: string;
 }) => {
-const supabase = createClient(
+  const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
@@ -34,7 +34,6 @@ const supabase = createClient(
     throw new Error("Failed to fetch user");
   }
 
-
   if (!existingUser) {
     const { error: insertError } = await supabase.from("users").insert({
       id: user.id,
@@ -51,3 +50,4 @@ const supabase = createClient(
 
   return { ok: true };
 };
+
